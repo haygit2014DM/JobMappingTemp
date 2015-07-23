@@ -1,0 +1,1 @@
+window.cdnPath = 'https://d31zyjoc8y26wk.cloudfront.net/';

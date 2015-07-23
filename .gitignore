@@ -1,0 +1,12 @@
+.DS_Store
+node_modules/
+bower_components/
+dist/
+public/js/lib.min.js
+public/css/lib.css
+c.bat
+t.bat
+.idea/
+global node modules/
+releases/
+hgApps/

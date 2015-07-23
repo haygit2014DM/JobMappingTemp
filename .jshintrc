@@ -1,0 +1,32 @@
+{
+  "curly": true,
+  "immed": true,
+  "newcap": true,
+  "noarg": true,
+  "sub": true,
+  "boss": true,
+  "eqnull": true,
+  "quotmark": "single",
+  "trailing": true,
+  "node": true,
+  "eqeqeq": true,
+  "undef": true,
+  "latedef": false,
+  "globals": {
+    "angular": true,
+    "$": true,
+    "_": true,
+    "FormData": true,
+    "Image": true,
+    "document": true,
+    "alert": true,
+    "FileReader": true,
+    "XMLHttpRequest": true,
+    "localStorage": true,
+    "window": true,
+    "parent": true,
+    "location": true,
+    "ActiveXObject": true,
+    "frames": true
+  }
+}

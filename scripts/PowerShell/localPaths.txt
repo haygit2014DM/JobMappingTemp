@@ -1,0 +1,6 @@
+Backbone for Dev and Dev-Int        C:\Other Source\SourceTree\ActivateGit\releases\prod-0.8.75
+Backbone for everything else        C:\Other Source\SourceTree\ActivateGit\releases\prod-0.8.75
+Angular                             C:\Other Source\SourceTree\activate-admin\releases\prod-0.2.4\hgApps
+
+Note: the angular really will be at C:\Other Source\SourceTree\activate-admin\hgApps (except for Dev and Dev-Int), or possibly at 
+Note: the backbone really will be at something like C:\Other Source\SourceTree\ActivateGit\releases\test-0.8.75

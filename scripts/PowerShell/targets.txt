@@ -1,0 +1,12 @@
+Dev         10.10.205.21    devtc02$\LEAPTCServer\webapps\ROOT
+Dev-Int     10.10.205.20    devtc01$\LEAPTCServer\webapps\ROOT
+Test        10.10.203.28    testtc01$\LEAPTCServer\webapps\ROOT
+Test        10.10.203.29    testtc02$\LEAPTCServer\webapps\ROOT
+Staging     10.10.204.21    d$\ProgramFiles\TCServer\LEAPTCServer\webapps\ROOT
+Staging     10.10.204.22    d$\ProgramFiles\TCServer\LEAPTCServer\webapps\ROOT
+Staging     10.10.204.23    d$\ProgramFiles\TCServer\LEAPTCServer\webapps\ROOT
+Staging     10.10.204.24    d$\ProgramFiles\TCServer\LEAPTCServer\webapps\ROOT
+Prod        10.8.67.6       vmware$\HG_Activate\webapps\ROOT
+Prod        10.8.67.7       vmware$\HG_Activate\webapps\ROOT
+Prod        10.8.67.8       vmware$\HG_Activate\webapps\ROOT
+Prod        10.8.67.9       vmware$\HG_Activate\webapps\ROOT

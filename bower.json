@@ -1,0 +1,48 @@
+{
+  "name": "activate-admin",
+  "version": "0.0.1",
+  "authors": [
+    "Priscilla Huff <priscilla.huff@haygroup.com>",
+    "Henrish Maluleka <henrish.maluleka@haygroup.com>",
+    "Daniel Marino <daniel.marino@haygroup.com>",
+    "Daniel Mohr <daniel.mohr@haygroup.com>",
+    "Zhonghai Zuo <zhonghai.zuo@haygroup.com>"
+  ],
+  "description": "An Angular app for activate admin module",
+  "keywords": [
+    "activate",
+    "admin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "select2": "~3.4.8",
+    "angular": "~1.2.20",
+    "angular-route": "~1.2.20",
+    "angular-translate": "~2.2.0",
+    "angular-translate-loader-static-files": "~2.2.0",
+    "bootstrap": "~3.2.0",
+    "angular-ui-bootstrap-bower": "~0.11.0",
+    "angular-ui-select2": "~0.0.5",
+    "lodash": "~2.4.1",
+    "datatables": "~1.10.3",
+    "angular-cookies": "~1.2.20",
+    "less": "~1.5.1",
+    "modernizr": "~2.8.3",
+    "seiyria-bootstrap-slider": "~3.1.0",
+    "jquery-placeholder":"~2.1.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.20"
+  },
+  "resolutions": {
+    "angular": "1.2.26"
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "name": "JobMapping",
+  "version": "0.0.1",
+  "cdn": "https://d31zyjoc8y26wk.cloudfront.net/",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/HayGroup/job-mapping"
+  },
+  "scripts": {
+    "start": "node app"
+  },
+  "devDependencies": {
+    "express": "3.1.0",
+    "express-http-proxy": "^0.6.0",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-handlebars": "~0.5.10",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-less": "0.11.4",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-html-convert": "0.0.2",
+    "grunt-html2js": "^0.3.2",
+    "grunt-jsbeautifier": "*",
+    "grunt-ng-annotate": "^0.10.0",
+    "grunt-notify": "~0.2.4",
+    "grunt-release": "*",
+    "grunt-script-link-tags": "*",
+    "grunt-shell": "*",
+    "grunt-sort-json": "*",
+    "grunt-text-replace": "^0.4.0",
+    "main-bower-files": "^2.7.0"
+  },
+  "products": [
+    "share",
+    "scribe",
+    "admin"
+  ],
+  "jsFilesToWatch": [
+    "Gruntfile.js",
+    "public/js/*.modules.js",
+    "public/js/**/*.js",
+    "!public/js/**/*.min.js"
+  ],
+  "jsAppFilesInBuild": {
+    "share": [
+      "public/js/share/**/*.js",
+      "!public/js/**/*.min.js"
+    ],
+    "scribe": [
+      "public/js/scribe.modules.js",
+      "public/js/scribe/**/*.js"
+    ],
+    "admin": [
+      "public/js/admin.modules.js",
+      "public/js/configuration/**/*.js"
+    ]
+  },
+  "htmlAppFilesInBuild": {
+    "share": [
+      "public/templates/share/**/*.html"
+    ],
+    "scribe": [
+      "public/templates/myroles/**/*.html",
+      "public/templates/share/**/*.html"
+    ],
+    "admin": [
+      "public/templates/configuration/**/*.html",
+      "public/templates/share/**/*.html"
+    ]
+  },
+  "jsLibFilesInBuild": [],
+  "jsCDNFilesInBuild": {
+    "admin": {
+      "devCss": [
+        "hgApps/css/lib.css",
+        "hgApps/css/app.admin.css"
+      ],
+      "releaseCss": [
+        "hgApps/css/lib.min.css",
+        "hgApps/css/app.admin.min.css"
+      ],
+      "dev": [
+        "hgApps/js/lib.js",
+        "hgApps/templates/admin.tpls.js",
+        "hgApps/js/hg.admin.js"
+
+      ],
+      "release": [
+        "hgApps/js/lib.min.js",
+        "hgApps/templates/admin.tpls.js",
+        "hgApps/js/hg.admin.min.js"
+      ],
+      "devRedirectScript": [
+      ],
+      "releaseRedirectScript": [
+        "public/js/share/externalScripts/redirectScript.js"
+      ],
+      "devCDNScript": [
+      ],
+      "releaseCDNScript": [
+        "public/js/share/externalScripts/cdnScript.js"
+      ]
+    },
+    "scribe": {
+      "devCss": [
+        "hgApps/css/lib.css",
+        "hgApps/css/app.scribe.css"
+      ],
+      "releaseCss": [
+        "hgApps/css/lib.min.css",
+        "hgApps/css/app.scribe.min.css"
+      ],
+      "dev": [
+        "hgApps/js/lib.js",
+        "hgApps/templates/scribe.tpls.js",
+        "hgApps/js/hg.scribe.js"
+      ],
+      "release": [
+        "hgApps/js/lib.min.js",
+        "hgApps/templates/scribe.tpls.js",
+        "hgApps/js/hg.scribe.min.js"
+      ],
+      "devRedirectScript": [
+      ],
+      "releaseRedirectScript": [
+        "public/js/share/externalScripts/redirectScript.js"
+      ],
+      "devCDNScript": [
+      ],
+      "releaseCDNScript": [
+        "public/js/share/externalScripts/cdnScript.js"
+      ]
+    }
+  },
+  "LESS": {
+    "dev": {},
+    "admin": [
+      "public/css/share/share.less",
+      "public/css/configuration/reset.css",
+      "public/css/configuration/admin.less",
+      "public/css/loading-indicator.css"
+    ],
+    "scribe": [
+      "public/css/share/share.less",
+      "public/css/scribe/scribe.less",
+      "public/css/loading-indicator.css"
+    ]
+  },
+  "configIndexReplace": {
+    "proxy": {
+      "DATA_DOMAIN_URL": "http://localhost:3001/api",
+      "ENVIRONMENT": "proxy",
+      "INDEX_FILES_TEMPLATES": [
+        "hgApps/configuration.html",
+        "hgApps/jobdescription.html"
+      ],
+      "TOOGLE_DEPLOY": false,
+      "LESS_FONT_PATH":"../../../fonts",
+      "CDN_TAG_PATH": ""
+    },
+    "dev": {
+      "DATA_DOMAIN_URL": "http://10.10.205.21",
+      "ENVIRONMENT": "dev",
+      "INDEX_FILES_TEMPLATES": [
+        "hgApps/configuration.html",
+        "hgApps/jobdescription.html"
+      ],
+      "TOOGLE_DEPLOY": false,
+      "LESS_FONT_PATH":"../../../fonts",
+      "CDN_TAG_PATH": ""
+    },
+    "devInit": {
+      "DATA_DOMAIN_URL": "https://leap.haygroup.com:7150/v1",
+      "ENVIRONMENT": "devInit",
+      "INDEX_FILES_TEMPLATES": [
+        "hgApps/configuration.html",
+        "hgApps/jobdescription.html"
+      ],
+      "TOOGLE_DEPLOY": false,
+      "LESS_FONT_PATH":"../../../fonts",
+      "CDN_TAG_PATH": ""
+    },
+    "test": {
+      "DATA_DOMAIN_URL": "https://leap.haygroup.com/v1",
+      "ENVIRONMENT": "testing",
+      "INDEX_FILES_TEMPLATES": [
+        "hgApps/configuration.html",
+        "hgApps/jobdescription.html"
+      ],
+      "TOOGLE_DEPLOY": false,
+      "LESS_FONT_PATH":"../../../fonts",
+      "CDN_TAG_PATH": ""
+    },
+    "stage": {
+      "DATA_DOMAIN_URL": "https://activate.haygroup.com/v1",
+      "ENVIRONMENT": "staging",
+      "INDEX_FILES_TEMPLATES": [
+        "hgApps/configuration.html",
+        "hgApps/jobdescription.html"
+      ],
+      "TOOGLE_DEPLOY": false,
+      "LESS_FONT_PATH":"../../../fonts",
+      "CDN_TAG_PATH": ""
+    },
+    "prod": {
+      "DATA_DOMAIN_URL": "https://activate.haygroup.com/v1",
+      "ENVIRONMENT": "production",
+      "INDEX_FILES_TEMPLATES": [
+        "hgApps/configuration.html",
+        "hgApps/jobdescription.html",
+        "hgApps/configuration2.html",
+        "hgApps/jobdescription2.html"
+      ],
+      "TOOGLE_DEPLOY": true,
+      "LESS_FONT_PATH":"https://activate.haygroup.com/fonts",
+      "CDN_TAG_PATH": "hgApps/"
+    }
+  },
+  "cssCDNFilesInBuild": [],
+  "lessFilesToWatch": [
+    "public/css/**/*.less"
+  ],
+  "cssFilesToWatch": [
+    "public/css/**/*.css"
+  ],
+  "jsHintConfig": {
+    "es3": true,
+    "bitwise": false,
+    "browser": true,
+    "curly": true,
+    "eqeqeq": true,
+    "eqnull": true,
+    "esnext": true,
+    "immed": true,
+    "jquery": true,
+    "latedef": true,
+    "newcap": true,
+    "noarg": true,
+    "node": true,
+    "strict": false,
+    "trailing": true,
+    "undef": true,
+    "predef": [
+      "appUtils",
+      "Android",
+      "_",
+      "angular"
+    ]
+  },
+  "jsBeautifierConfig": {
+    "jslintHappy": true,
+    "spaceBeforeConditional": true
+  }
+}

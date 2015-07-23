@@ -1,0 +1,96 @@
+
+        function createCookie(name,value,days) {
+            var expires;
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime()+(days*24*60*60*1000));
+                expires = '; expires='+date.toGMTString();
+            }
+            else{ expires = ''; }
+            document.cookie = name+'='+value+expires+'; path=/';
+        }
+
+        function readCookie(name) {
+            var nameEQ = name + '=';
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)===' '){ c = c.substring(1,c.length); }
+                if (c.indexOf(nameEQ) === 0){ return c.substring(nameEQ.length,c.length); }
+            }
+            return null;
+        }
+
+        function eraseCookie(name) {
+            createCookie(name,'',-1);
+        }
+
+        /* This implements the actual redirection. */
+        var redirectBrowser = function () {
+            window.useCDN = true;
+            var uri = 'https://activate.haygroup.com/[[baseFilename]]2.html';
+            window.location = uri;
+        };
+
+        /* These are the country codes for the countries we have sites for.
+         * We will check to see if a visitor is coming from one of these countries.
+         * If they are, we redirect them to the country-specific site */
+        var sites = {
+            'cn': true
+        };
+
+        var redirect = (function () {
+
+            var onSuccess = function (geoipResponse) {
+
+                eraseCookie('countryOfOrigin');
+
+                /* There's no guarantee that a successful response object
+                 * has any particular property, so we need to code defensively. */
+                if (!geoipResponse.country.iso_code) {
+                    /* alert('The GeoIP service did not return the country.'); */
+                    return;
+                }
+
+                /* ISO country codes are in upper case. */
+                var code = geoipResponse.country.iso_code.toLowerCase();
+
+                createCookie('countryOfOrigin', code, 1);
+
+                if ( sites[code] ) {
+                    redirectBrowser(code);
+                }
+                else {
+                    /*
+                    alert(
+                        "You are not in China. You are in:\n\n"
+                        + JSON.stringify(geoipResponse, undefined, 4)
+                    );
+                    */
+                    return;
+                }
+            };
+            var onError = function (error) {
+                /*
+                alert(
+                    "Error:\n\n"
+                    + JSON.stringify(error, undefined, 4)
+                );
+                */
+                return;
+            };
+            return function () {
+                geoip2.country( onSuccess, onError );       //jshint ignore:line
+            };
+        }());
+
+        var countryOfOrigin = readCookie('countryOfOrigin');
+
+        if (countryOfOrigin === null) {
+            redirect();
+        }
+        else {
+            if ( sites[countryOfOrigin] ) {
+                redirectBrowser();
+            }
+        }
