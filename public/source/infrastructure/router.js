@@ -3,15 +3,17 @@ angular.module('hg.jobMapping').config(['$routeProvider',
     
     $routeProvider.
     
-      when('/jobdescription/login', {
-        templateUrl: 'templates/myroles/auth/login.html',
-        controller: 'ScribeLoginCtrl'
+      when('/jobmapping/login', {
+        templateUrl: 'source/pages/auth/login.html',
+        controller: 'JobMappingLoginCtrl'
       }).
-      when('/jobdescription', {
-        templateUrl: 'templates/myroles/wizard/index.html',
-        controller: 'ScribeCtrl',
-      }).
+      when('/jobmapping', {
+        templateUrl: 'source/pages/index.html',
+        controller: 'JobMappingCtrl',
+      })
       
+      //Example from Job Description
+      /*
       //Dashboard
       when('/jobdescription/dashboard', {
         templateUrl: 'templates/myroles/dashboard/index.html',
@@ -31,10 +33,11 @@ angular.module('hg.jobMapping').config(['$routeProvider',
           }
         }
       })
+      */
       
       //Error Page
-      when('/jobdescription/error', {
-        templateUrl: 'templates/myroles/share/error.html',
+      when('/jobmapping/error', {
+        templateUrl: 'source/pages/error.html',
         controller: 'ErrorCtrl',
         resolve: {
         }
