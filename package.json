@@ -97,12 +97,12 @@
       "devRedirectScript": [
       ],
       "releaseRedirectScript": [
-        "public/js/share/externalScripts/redirectScript.js"
+        "public/source/externalScripts/redirectScript.js"
       ],
       "devCDNScript": [
       ],
       "releaseCDNScript": [
-        "public/js/share/externalScripts/cdnScript.js"
+        "public/source/externalScripts/cdnScript.js"
       ]
     },
     "scribe": {
@@ -127,12 +127,12 @@
       "devRedirectScript": [
       ],
       "releaseRedirectScript": [
-        "public/js/share/externalScripts/redirectScript.js"
+        "public/source/externalScripts/redirectScript.js"
       ],
       "devCDNScript": [
       ],
       "releaseCDNScript": [
-        "public/js/share/externalScripts/cdnScript.js"
+        "public/source/externalScripts/cdnScript.js"
       ]
     }
   },

@@ -23,8 +23,8 @@ module.exports = function (grunt) {
   } )();
   
   var includeGeoIP2 = '<script src="//js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js" type="text/javascript"></script>';
-  var redirectScriptContents = grunt.file.read('public/js/share/externalScripts/redirectScript.txt');
-  var cdnScriptContents = grunt.file.read('public/js/share/externalScripts/cdnScript.txt');
+  var redirectScriptContents = grunt.file.read('public/source/externalScripts/redirectScript.txt');
+  var cdnScriptContents = grunt.file.read('public/source/externalScripts/cdnScript.txt');
 
   var _env_compile = {env: "dev",configIndexReplace: _pkg.configIndexReplace.dev};
   grunt.initConfig({
