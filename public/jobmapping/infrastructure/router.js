@@ -3,14 +3,11 @@ angular.module('hg.jobMapping').config(['$routeProvider',
     
     $routeProvider.
     
-      when('/jobmapping/login', {
-        templateUrl: 'source/pages/auth/login.html',
-        controller: 'JobMappingLoginCtrl'
-      }).
+
       when('/jobmapping', {
-        templateUrl: 'source/pages/index.html',
-        controller: 'JobMappingCtrl',
-      })
+        templateUrl: 'jobmapping.html',
+        controller: 'JobMappingCtrl'
+      });
       
       //Example from Job Description
       /*
@@ -36,16 +33,7 @@ angular.module('hg.jobMapping').config(['$routeProvider',
       */
       
       //Error Page
-      when('/jobmapping/error', {
-        templateUrl: 'source/pages/error.html',
-        controller: 'ErrorCtrl',
-        resolve: {
-        }
-      }).
-      
-      otherwise({
-        redirectTo: '/'
-      });
+
       
   }
 ]);

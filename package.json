@@ -1,11 +1,11 @@
 {
-  "name": "JobMapping",
-  "version": "0.0.1",
+  "name": "jobmapping",
+  "version": "0.2.4",
   "cdn": "https://d31zyjoc8y26wk.cloudfront.net/",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/HayGroup/job-mapping"
+    "url": "git://github.com/HayGroup/JobMappingTemp"
   },
   "scripts": {
     "start": "node app"
@@ -35,119 +35,63 @@
     "main-bower-files": "^2.7.0"
   },
   "products": [
-    "share",
-    "scribe",
-    "admin"
+    "jobmapping"
   ],
   "jsFilesToWatch": [
     "Gruntfile.js",
-    "public/js/*.modules.js",
-    "public/js/**/*.js",
-    "!public/js/**/*.min.js"
+    "public/jobmapping/pages/**/*.js",
+    "public/jobmapping/infrastructure/*.js",
+    "public/*.js"
   ],
   "jsAppFilesInBuild": {
-    "share": [
-      "public/js/share/**/*.js",
-      "!public/js/**/*.min.js"
-    ],
-    "scribe": [
-      "public/js/scribe.modules.js",
-      "public/js/scribe/**/*.js"
-    ],
-    "admin": [
-      "public/js/admin.modules.js",
-      "public/js/configuration/**/*.js"
+    "jobmapping": [
+      "public/jobmapping/pages/**/*.js",
+      "public/jobmapping/infrastructure/*.js",
+      "public/*.js"
     ]
   },
   "htmlAppFilesInBuild": {
-    "share": [
-      "public/templates/share/**/*.html"
-    ],
-    "scribe": [
-      "public/templates/myroles/**/*.html",
-      "public/templates/share/**/*.html"
-    ],
-    "admin": [
-      "public/templates/configuration/**/*.html",
-      "public/templates/share/**/*.html"
+    "jobmapping": [
+      "public/jobmapping/pages/**/*.html"
     ]
   },
   "jsLibFilesInBuild": [],
   "jsCDNFilesInBuild": {
-    "admin": {
+    "jobmapping": {
       "devCss": [
         "hgApps/css/lib.css",
-        "hgApps/css/app.admin.css"
+        "hgApps/css/app.jobmapping.css"
       ],
       "releaseCss": [
         "hgApps/css/lib.min.css",
-        "hgApps/css/app.admin.min.css"
+        "hgApps/css/app.jobmapping.min.css"
       ],
       "dev": [
         "hgApps/js/lib.js",
-        "hgApps/templates/admin.tpls.js",
-        "hgApps/js/hg.admin.js"
-
+        "hgApps/templates/jobmapping.tpls.js",
+        "hgApps/js/hg.jobmapping.js"
       ],
       "release": [
         "hgApps/js/lib.min.js",
-        "hgApps/templates/admin.tpls.js",
-        "hgApps/js/hg.admin.min.js"
+        "hgApps/templates/jobmapping.tpls.js",
+        "hgApps/js/hg.jobmapping.min.js"
       ],
       "devRedirectScript": [
       ],
       "releaseRedirectScript": [
-        "public/source/externalScripts/redirectScript.js"
+        "public/launcher/externalScripts/redirectScript.js"
       ],
       "devCDNScript": [
       ],
       "releaseCDNScript": [
-        "public/source/externalScripts/cdnScript.js"
-      ]
-    },
-    "scribe": {
-      "devCss": [
-        "hgApps/css/lib.css",
-        "hgApps/css/app.scribe.css"
-      ],
-      "releaseCss": [
-        "hgApps/css/lib.min.css",
-        "hgApps/css/app.scribe.min.css"
-      ],
-      "dev": [
-        "hgApps/js/lib.js",
-        "hgApps/templates/scribe.tpls.js",
-        "hgApps/js/hg.scribe.js"
-      ],
-      "release": [
-        "hgApps/js/lib.min.js",
-        "hgApps/templates/scribe.tpls.js",
-        "hgApps/js/hg.scribe.min.js"
-      ],
-      "devRedirectScript": [
-      ],
-      "releaseRedirectScript": [
-        "public/source/externalScripts/redirectScript.js"
-      ],
-      "devCDNScript": [
-      ],
-      "releaseCDNScript": [
-        "public/source/externalScripts/cdnScript.js"
+        "public/launcher/externalScripts/cdnScript.js"
       ]
     }
   },
   "LESS": {
     "dev": {},
-    "admin": [
-      "public/css/share/share.less",
-      "public/css/configuration/reset.css",
-      "public/css/configuration/admin.less",
-      "public/css/loading-indicator.css"
-    ],
-    "scribe": [
-      "public/css/share/share.less",
-      "public/css/scribe/scribe.less",
-      "public/css/loading-indicator.css"
+    "jobmapping": [
+      "public/css/app.jobmapping.css"
     ]
   },
   "configIndexReplace": {
@@ -155,8 +99,7 @@
       "DATA_DOMAIN_URL": "http://localhost:3001/api",
       "ENVIRONMENT": "proxy",
       "INDEX_FILES_TEMPLATES": [
-        "hgApps/configuration.html",
-        "hgApps/jobdescription.html"
+        "hgApps/jobmapping.html"
       ],
       "TOOGLE_DEPLOY": false,
       "LESS_FONT_PATH":"../../../fonts",
@@ -166,8 +109,7 @@
       "DATA_DOMAIN_URL": "http://10.10.205.21",
       "ENVIRONMENT": "dev",
       "INDEX_FILES_TEMPLATES": [
-        "hgApps/configuration.html",
-        "hgApps/jobdescription.html"
+        "hgApps/jobmapping.html"
       ],
       "TOOGLE_DEPLOY": false,
       "LESS_FONT_PATH":"../../../fonts",
@@ -177,8 +119,7 @@
       "DATA_DOMAIN_URL": "https://leap.haygroup.com:7150/v1",
       "ENVIRONMENT": "devInit",
       "INDEX_FILES_TEMPLATES": [
-        "hgApps/configuration.html",
-        "hgApps/jobdescription.html"
+        "hgApps/jobmapping.html"
       ],
       "TOOGLE_DEPLOY": false,
       "LESS_FONT_PATH":"../../../fonts",
@@ -188,8 +129,7 @@
       "DATA_DOMAIN_URL": "https://leap.haygroup.com/v1",
       "ENVIRONMENT": "testing",
       "INDEX_FILES_TEMPLATES": [
-        "hgApps/configuration.html",
-        "hgApps/jobdescription.html"
+        "hgApps/jobmapping.html"
       ],
       "TOOGLE_DEPLOY": false,
       "LESS_FONT_PATH":"../../../fonts",
@@ -199,8 +139,7 @@
       "DATA_DOMAIN_URL": "https://activate.haygroup.com/v1",
       "ENVIRONMENT": "staging",
       "INDEX_FILES_TEMPLATES": [
-        "hgApps/configuration.html",
-        "hgApps/jobdescription.html"
+        "hgApps/jobmapping.html"
       ],
       "TOOGLE_DEPLOY": false,
       "LESS_FONT_PATH":"../../../fonts",
@@ -210,10 +149,7 @@
       "DATA_DOMAIN_URL": "https://activate.haygroup.com/v1",
       "ENVIRONMENT": "production",
       "INDEX_FILES_TEMPLATES": [
-        "hgApps/configuration.html",
-        "hgApps/jobdescription.html",
-        "hgApps/configuration2.html",
-        "hgApps/jobdescription2.html"
+        "hgApps/jobmapping.html"
       ],
       "TOOGLE_DEPLOY": true,
       "LESS_FONT_PATH":"https://activate.haygroup.com/fonts",
@@ -222,10 +158,10 @@
   },
   "cssCDNFilesInBuild": [],
   "lessFilesToWatch": [
-    "public/css/**/*.less"
+    "public/jobmapping/css/*.less"
   ],
   "cssFilesToWatch": [
-    "public/css/**/*.css"
+    "public/jobmapping/css/*.css"
   ],
   "jsHintConfig": {
     "es3": true,

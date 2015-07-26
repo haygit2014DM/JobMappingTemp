@@ -18,7 +18,7 @@ var environmentUrls =  ['http://10.10.205.21', 'https://leap.haygroup.com:7150',
                         'http://10.10.204.21', 'http://10.10.204.22', 'http://10.10.204.23', 'http://10.10.204.24', 'http://localhost:3001/api'];
 
 var thisEnvironmentName = 'Production';                    //by default
-var thisEnvironmentUrl = 'https://activate.haygroup.com'   //by default
+var thisEnvironmentUrl = 'https://activate.haygroup.com';  //by default
 
 if(localEnvironment){
   for(var i = 0; i < environmentUrls.length; i++){

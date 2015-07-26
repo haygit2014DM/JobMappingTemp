@@ -7,24 +7,12 @@ module.exports = function (grunt) {
     ret.jsLibFilesInBuild = mainBowerFiles({filter:/.*\.js/ });
     ret.cssLibFilesInBuild = mainBowerFiles({filter:/.*\.css/});
 
-    // TODO: this does not work to get the min files, do I need them?
-    //ret.jsLibFilesInBuildRelease = mainBowerFiles({filter:/.*\.min.js/});
-    //ret.cssLibFilesInBuildRelease = mainBowerFiles({filter:/.*\.min.css/});
-
-
-    //var temp = [];
-    //ret.jsAppFilesInBuild.all =  temp.concat(ret.jsAppFilesInBuild.admin)
-    //    .concat(ret.jsAppFilesInBuild.scribe)
-    //    .concat(ret.jsAppFilesInBuild.share);
-    //ret.jsAppFilesInBuild.admin = ret.jsAppFilesInBuild.admin.concat(ret.jsAppFilesInBuild.share);
-    //ret.jsAppFilesInBuild.scribe = ret.jsAppFilesInBuild.scribe.concat(ret.jsAppFilesInBuild.share);
-
     return ret;
   } )();
   
   var includeGeoIP2 = '<script src="//js.maxmind.com/js/apis/geoip2/v2.1/geoip2.js" type="text/javascript"></script>';
-  var redirectScriptContents = grunt.file.read('public/source/externalScripts/redirectScript.txt');
-  var cdnScriptContents = grunt.file.read('public/source/externalScripts/cdnScript.txt');
+  var redirectScriptContents = grunt.file.read('public/launcher/externalScripts/redirectScript.txt');
+  var cdnScriptContents = grunt.file.read('public/launcher/externalScripts/cdnScript.txt');
 
   var _env_compile = {env: "dev",configIndexReplace: _pkg.configIndexReplace.dev};
   grunt.initConfig({
@@ -74,9 +62,7 @@ module.exports = function (grunt) {
         },
         files: [
           {
-            //'public/js/lib.min.js': ['<%= pkg.jsLibFilesInBuild %>'],
-            'hgApps/js/hg.admin.js': ['<%= pkg.jsAppFilesInBuild.admin %>','<%= pkg.jsAppFilesInBuild.share %>'],
-            'hgApps/js/hg.scribe.js': ['<%= pkg.jsAppFilesInBuild.scribe %>','<%= pkg.jsAppFilesInBuild.share %>']
+            'hgApps/js/hg.jobmapping.js': ['<%= pkg.jsAppFilesInBuild.jobmapping %>','<%= pkg.jsAppFilesInBuild.jobmapping %>']
 
           }
         ]
@@ -87,9 +73,7 @@ module.exports = function (grunt) {
         },
         files: [
           {
-            //'public/js/lib.min.js': ['<%= pkg.jsLibFilesInBuild %>'],
-            'hgApps/js/hg.admin.min.js': ['<%= pkg.jsAppFilesInBuild.admin %>','<%= pkg.jsAppFilesInBuild.share %>'],
-            'hgApps/js/hg.scribe.min.js': ['<%= pkg.jsAppFilesInBuild.scribe %>','<%= pkg.jsAppFilesInBuild.share %>']
+            'hgApps/js/hg.jobmapping.js': ['<%= pkg.jsAppFilesInBuild.jobmapping %>','<%= pkg.jsAppFilesInBuild.jobmapping %>']
 
           }
         ]
@@ -117,7 +101,7 @@ module.exports = function (grunt) {
             expand: true,
             dot: true,
             cwd: 'public',
-            src: ['**/*.template.html', 'index.html', '*2.html'],
+            src: ['**/*.template.html', 'jobmapping.html', '*2.html'],
             dest: 'hgApps/',
             rename: function(dest, src) {
               return dest + src.replace('.template','');
@@ -125,51 +109,33 @@ module.exports = function (grunt) {
           },
           {
           expand: true,
-          cwd: 'public/data',
+          cwd: 'public/jobmapping/data',
           src: ['**'],
           dest: 'hgApps/data'
         },
           {
             expand: true,
-            cwd: 'public/css',
-            src: ['**/*.gif', '**/*.png'],
+            cwd: 'public/jobmapping/css',
+            src: ['**'],
             dest: 'hgApps/css'
           },
         {
           expand: true,
-          cwd: 'public/fonts',
+          cwd: 'public/launcher/fonts',
           src: ['**'],
           dest: 'hgApps/fonts'
         }, {
           expand: true,
-          cwd: 'public/font',
+          cwd: 'public/launcher/images',
           src: ['**'],
-          dest: 'hgApps/font'
+          dest: 'hgApps/images'
         },
           {
           expand: true,
-          cwd: 'public/i',
+          cwd: 'public/launcher/media',
           src: ['**'],
-          dest: 'hgApps/i'
-        },
-        //  {
-        //  expand: true,
-        //  cwd: 'public/languages',
-        //  src: ['**'],
-        //  dest: 'hgApps/languages'
-        //},
-          {
-            expand: true,
-            cwd: 'public/media',
-            src: ['**'],
-            dest: 'hgApps/media'
-          }
-          //,  {
-          //  expand: true,
-          //  cwd: 'public/templates',
-          //  src: ['**'],
-          //  dest: 'hgApps/templates'
-          //}
+          dest: 'hgApps/media'
+        }
         ]
       },
       package: {
@@ -179,26 +145,18 @@ module.exports = function (grunt) {
             dot: true,
             cwd: 'hgApps',
             src: ['**'],
-            dest: 'releases/<%= env_compile.env %>-<%= pkg.version %>/hgApps',
+            dest: 'releases/<%= env_compile.env %>-<%= pkg.version %>/hgApps'
 
-          },
-]
+          }
+        ]
       }
 
     },
-    //sortJSON: {
-    //  locales: {
-    //    src: ['public-dev/locales/*-master.json']
-    //  }
-    //},
-    // uses grunt-contrib-less task
+
     less: {
       developmentCss: {
         files: {
-          'hgApps/css/app.scribe.css': ['<%= pkg.LESS.scribe %>'],
-          'hgApps/css/app.admin.css': ['<%= pkg.LESS.admin %>'],
-          'hgApps/css/lib.css': ['<%= pkg.cssLibFilesInBuild %>'],
-          'hgApps/css/ipad.css': ['public/css/scribe/ipad.less']
+          'hgApps/css/app.jobmapping.css': ['<%= pkg.LESS.jobmapping %>']
         },
         options: {
           modifyVars: {
@@ -206,7 +164,7 @@ module.exports = function (grunt) {
           },
           sourceMap: true,
           sourceMapFileInline: true,
-          sourceMapBasepath: 'public/css/',
+          sourceMapBasepath: 'public/css/'
           //syncImport: true ///TODO: Check that is needed?
         }
       },
@@ -220,183 +178,95 @@ module.exports = function (grunt) {
           }
         },
         files: {
-          'hgApps/css/app.scribe.min.css': ['<%= pkg.LESS.scribe %>'],
-          'hgApps/css/app.admin.min.css': ['<%= pkg.LESS.admin %>'],
-          'hgApps/css/lib.min.css': ['<%= pkg.cssLibFilesInBuild %>'],
-          'hgApps/css/ipad.css': ['public/css/scribe/ipad.less']
+          'hgApps/css/app.jobmapping.css': ['<%= pkg.LESS.jobmapping %>']
         }
       }
     },
     tags: { /// this has to run after "replace"
     
       //JS includes for Configuration
-      devAdminJS: {
+      devJobmappingJS: {
         options: {
 
           scriptTemplate:'<script type="text/javascript"  src="{{ path }}?_=<%= pkg.version %>-<%= pkg.randomNumForCacheBusting %>"></script>',
           openTag: '<!--- Add JS Libs Start -->',
           closeTag: '<!--- Add JS Libs End -->'
         },
-        src: ['<%= pkg.jsCDNFilesInBuild.admin.dev %>'],
-        dest: 'hgApps/configuration.html'
+        src: ['<%= pkg.jsCDNFilesInBuild.jobmapping.dev %>'],
+        dest: 'hgApps/jobmapping.html'
       },
-      releaseAdminJS: {
+      releaseJobmappingJS: {
         options: {
 
           scriptTemplate:'<script type="text/javascript"  src="<%= pkg.cdn %><%= env_compile.configIndexReplace.CDN_TAG_PATH %>{{ path }}?_=<%= pkg.version %>-<%= pkg.randomNumForCacheBusting %>"></script>',
           openTag: '<!--- Add JS Libs Start -->',
           closeTag: '<!--- Add JS Libs End -->'
         },
-        src: ['<%= pkg.jsCDNFilesInBuild.admin.release %>'],
-        dest: 'hgApps/configuration.html'
+        src: ['<%= pkg.jsCDNFilesInBuild.jobmapping.release %>'],
+        dest: 'hgApps/jobmapping.html'
       },
 
       //CSS includes for Configuration
-      devAdminCSS: {
+      devJobmappingCSS: {
         options: {
 
           linkTemplate:'<link href="{{ path }}?_=<%= pkg.version %>-<%= pkg.randomNumForCacheBusting %>" rel="stylesheet" type="text/css">',
           openTag: '<!--- Add Css Libs Start -->',
           closeTag: '<!--- Add Css Libs End -->'
         },
-        src: ['<%= pkg.jsCDNFilesInBuild.admin.devCss %>'],
-        dest: 'hgApps/configuration.html'
+        src: ['<%= pkg.jsCDNFilesInBuild.jobmapping.devCss %>'],
+        dest: 'hgApps/jobmapping.html'
       },
-      releaseAdminCSS: {
+      releaseJobmappingCSS: {
         options: {
 
           linkTemplate:'<link href="<%= pkg.cdn %><%= env_compile.configIndexReplace.CDN_TAG_PATH %>{{ path }}?_=<%= pkg.version %>-<%= pkg.randomNumForCacheBusting %>" rel="stylesheet" type="text/css">',
           openTag: '<!--- Add Css Libs Start -->',
           closeTag: '<!--- Add Css Libs End -->'
         },
-        src: ['<%= pkg.jsCDNFilesInBuild.admin.releaseCss %>'],
-        dest: 'hgApps/configuration.html'
-      },
-      
-      //JS includes for Scribe
-      devScribeJS: {
-        options: {
-
-          scriptTemplate:'<script type="text/javascript"  src="{{ path }}?_=<%= pkg.version %>-<%= pkg.randomNumForCacheBusting %>"></script>',
-          openTag: '<!--- Add JS Libs Start -->',
-          closeTag: '<!--- Add JS Libs End -->'
-        },
-        src: ['<%= pkg.jsCDNFilesInBuild.scribe.dev %>'],
-        dest: 'hgApps/jobdescription.html'
-      },
-      releaseScribeJS: {
-        options: {
-
-          scriptTemplate:'<script type="text/javascript"  src="<%= pkg.cdn %><%= env_compile.configIndexReplace.CDN_TAG_PATH %>{{ path }}?_=<%= pkg.version %>-<%= pkg.randomNumForCacheBusting %>"></script>',
-          openTag: '<!--- Add JS Libs Start -->',
-          closeTag: '<!--- Add JS Libs End -->'
-        },
-        src: ['<%= pkg.jsCDNFilesInBuild.scribe.release %>'],
-        dest: 'hgApps/jobdescription.html'
-      },
-
-      //CSS includes for Scribe
-      devScribeCSS: {
-        options: {
-
-          linkTemplate:'<link href="{{ path }}?_=<%= pkg.version %>-<%= pkg.randomNumForCacheBusting %>" rel="stylesheet" type="text/css">',
-          openTag: '<!--- Add Css Libs Start -->',
-          closeTag: '<!--- Add Css Libs End -->'
-        },
-        src: ['<%= pkg.jsCDNFilesInBuild.scribe.devCss %>'],
-        dest: 'hgApps/jobdescription.html'
-      },
-      releaseScribeCSS: {
-        options: {
-
-          linkTemplate:'<link href="<%= pkg.cdn %><%= env_compile.configIndexReplace.CDN_TAG_PATH %>{{ path }}?_=<%= pkg.version %>-<%= pkg.randomNumForCacheBusting %>" rel="stylesheet" type="text/css">',
-          openTag: '<!--- Add Css Libs Start -->',
-          closeTag: '<!--- Add Css Libs End -->'
-        },
-        src: ['<%= pkg.jsCDNFilesInBuild.scribe.releaseCss %>'],
-        dest: 'hgApps/jobdescription.html'
+        src: ['<%= pkg.jsCDNFilesInBuild.jobmapping.releaseCss %>'],
+        dest: 'hgApps/jobmapping.html'
       },
       
       //script to redirect to CDN version of Configuration html file
-      devAdminIndexRedirectScript: {
+      devJobmappingIndexRedirectScript: {
         options: {
           scriptTemplate: '',
           openTag: '<!--- Add JS Redirect Script Start -->',
           closeTag: '<!--- Add JS Redirect Script End -->'
         },
-        src: ['<%= pkg.jsCDNFilesInBuild.admin.devRedirectScript %>'],
-        dest: 'hgApps/configuration.html'
+        src: ['<%= pkg.jsCDNFilesInBuild.jobmapping.devRedirectScript %>'],
+        dest: 'hgApps/jobmapping.html'
       },
-      releaseAdminIndexRedirectScript: {
+      releaseJobmappingIndexRedirectScript: {
         options: {
-          scriptTemplate: '<script type="text/javascript">' + includeGeoIP2 + redirectScriptContents.replace('[[baseFilename]]', 'configuration') + '</script>',
+          scriptTemplate: '<script type="text/javascript">' + includeGeoIP2 + redirectScriptContents.replace('[[baseFilename]]', 'jobmapping') + '</script>',
           openTag: '<!--- Add JS Redirect Script Start -->',
           closeTag: '<!--- Add JS Redirect Script End -->'
         },
-        src: ['<%= pkg.jsCDNFilesInBuild.admin.releaseRedirectScript %>'],   //technically source doesn't matter
-        dest: 'hgApps/configuration.html'
-      },
-      
-      //script to redirect to CDN version of Scribe html file
-      devScribeIndexRedirectScript: {
-        options: {
-          scriptTemplate: '',
-          openTag: '<!--- Add JS Redirect Script Start -->',
-          closeTag: '<!--- Add JS Redirect Script End -->'
-        },
-        src: ['<%= pkg.jsCDNFilesInBuild.scribe.devRedirectScript %>'],
-        dest: 'hgApps/jobdescription.html'
-      },
-      releaseScribeIndexRedirectScript: {
-        options: {
-          scriptTemplate: '<script type="text/javascript">' + includeGeoIP2 + redirectScriptContents.replace('{{baseFilename}}', 'jobdescription') + '</script>',
-          openTag: '<!--- Add JS Redirect Script Start -->',
-          closeTag: '<!--- Add JS Redirect Script End -->'
-        },
-        src: ['<%= pkg.jsCDNFilesInBuild.scribe.releaseRedirectScript %>'],   //technically source doesn't matter
-        dest: 'hgApps/jobdescription.html'
+        src: ['<%= pkg.jsCDNFilesInBuild.jobmapping.releaseRedirectScript %>'],   //technically source doesn't matter
+        dest: 'hgApps/jobmapping.html'
       },
       
       //script to set the CDN path in Admin
-      devAdminIndexCDNScript: {
+      devJobmappingIndexCDNScript: {
         options: {
           scriptTemplate: '',
           openTag: '<!--- Add CDN Path Start -->',
           closeTag: '<!--- Add CDN Path End -->'
         },
-        src: ['<%= pkg.jsCDNFilesInBuild.admin.devCDNScript %>'],
-        dest: 'hgApps/configuration.html'
+        src: ['<%= pkg.jsCDNFilesInBuild.jobmapping.devCDNScript %>'],
+        dest: 'hgApps/jobmapping.html'
       },
-      releaseAdminIndexCDNScript: {
+      releaseJobmappingIndexCDNScript: {
         options: {
           scriptTemplate: '<script type="text/javascript">' + cdnScriptContents + '</script>',
           openTag: '<!--- Add CDN Path Start -->',
           closeTag: '<!--- Add CDN Path End -->'
         },
-        src: ['<%= pkg.jsCDNFilesInBuild.admin.releaseCDNScript %>'],   //technically source doesn't matter
-        dest: 'hgApps/configuration.html'
-      },
-      
-      //script to set the CDN path in Scribe
-      devScribeIndexCDNScript: {
-        options: {
-          scriptTemplate: '',
-          openTag: '<!--- Add CDN Path Start -->',
-          closeTag: '<!--- Add CDN Path End -->'
-        },
-        src: ['<%= pkg.jsCDNFilesInBuild.scribe.devCDNScript %>'],
-        dest: 'hgApps/jobdescription.html'
-      },
-      releaseScribeIndexCDNScript: {
-        options: {
-          scriptTemplate: '<script type="text/javascript">' + cdnScriptContents + '</script>',
-          openTag: '<!--- Add CDN Path Start -->',
-          closeTag: '<!--- Add CDN Path End -->'
-        },
-        src: ['<%= pkg.jsCDNFilesInBuild.scribe.releaseCDNScript %>'],   //technically source doesn't matter
-        dest: 'hgApps/jobdescription.html'
+        src: ['<%= pkg.jsCDNFilesInBuild.jobmapping.releaseCDNScript %>'],   //technically source doesn't matter
+        dest: 'hgApps/jobmapping.html'
       }
-
     },
     // uses grunt-contrib-uglify task
     uglify: {
@@ -411,8 +281,7 @@ module.exports = function (grunt) {
         },
         files: {
           'hgApps/js/lib.js': ['<%= pkg.jsLibFilesInBuild %>'],
-          'hgApps/js/hg.admin.js': ['hgApps/js/hg.admin.js'],
-          'hgApps/js/hg.scribe.js': ['hgApps/js/hg.scribe.js']
+          'hgApps/js/hg.jobmapping.js': ['hgApps/js/hg.jobmapping.js']
         }
       },
       release: {
@@ -425,8 +294,7 @@ module.exports = function (grunt) {
         },
         files: {
           'hgApps/js/lib.min.js': ['<%= pkg.jsLibFilesInBuild %>'],
-          'hgApps/js/hg.admin.min.js': ['hgApps/js/hg.admin.min.js'],
-          'hgApps/js/hg.scribe.min.js': ['hgApps/js/hg.scribe.min.js']
+          'hgApps/js/hg.jobmapping.js': ['hgApps/js/hg.jobmapping.js']
         }
       }
     },
@@ -462,25 +330,14 @@ module.exports = function (grunt) {
     },
     html2js: {
       options: {
-        base:'../activate-admin/public/',
+        base:'../JobMappingTemp/public/',
         watch: true
       },
-      scribe: {
-        src: ['<%= pkg.htmlAppFilesInBuild.scribe %>'],
-        dest: 'hgApps/templates/scribe.tpls.js'
-      },
-      admin: {
-        src: ['<%= pkg.htmlAppFilesInBuild.admin %>'],
-        dest: 'hgApps/templates/admin.tpls.js'
+      jobmapping: {
+        src: ['<%= pkg.htmlAppFilesInBuild.jobmapping %>'],
+        dest: 'hgApps/templates/jobmapping.tpls.js'
       }
-      //scribeRelease: {
-      //  src: ['<%= pkg.htmlAppFilesInBuild.scribe %>'],
-      //  dest: 'hgApps/templates/scribe.tpls.js'
-      //},
-      //adminRelease: {
-      //  src: ['<%= pkg.htmlAppFilesInBuild.admin %>'],
-      //  dest: 'hgApps/templates/admin.tpls.js'
-      //}
+
     },
     watch: {
       options: {
@@ -491,7 +348,7 @@ module.exports = function (grunt) {
         tasks: ['less:developmentCss']
       },
       js: {
-        files: ['<%= pkg.jsLibFilesInBuild %>','<%= pkg.jsAppFilesInBuild.admin %>','<%= pkg.jsAppFilesInBuild.share %>','<%= pkg.jsAppFilesInBuild.scribe %>',],
+        files: ['<%= pkg.jsLibFilesInBuild %>','<%= pkg.jsAppFilesInBuild.jobmapping %>'],
         tasks: ['jshint']
       },
 
@@ -499,55 +356,8 @@ module.exports = function (grunt) {
         files: ['package.json'],
         tasks: ['default']
       }
-    },
-    /**
-     * FOR USAGE:
-     * See Build & Release Process docs in wiki.
-     * This uses environment variables. These aren't placeholder values!
-     */
-    //release: {
-    //  options: {
-    //    npm: false,
-    //    github: {
-    //      repo: 'HayGroup/hay-101a',
-    //      usernameVar: 'GITHUB_USERNAME',
-    //      passwordVar: 'GITHUB_PASSWORD'
-    //    }
-    //  }
-    //},
-    //shell: {
-    //  prodRelease: {
-    //    options: {
-    //      stdout: true
-    //    },
-    //    command: ['cp -r ./public-prod ./releases/prod-<%= pkg.version %>'].join('&&')
-    //  },
-    //  testRelease: {
-    //    options: {
-    //      stdout: true
-    //    },
-    //    command: ['cp -r ./public-dev ./releases/test-<%= pkg.version %>',
-    //      'rm -rf ./releases/test-<%= pkg.version %>/templates/*/'
-    //    ].join('&&')
-    //  },
-    //  stagingRelease: {
-    //    options: {
-    //      stdout: true
-    //    },
-    //    command: ['cp -r ./public-dev ./releases/staging-<%= pkg.version %>',
-    //      'rm -rf ./releases/staging-<%= pkg.version %>/templates/*/'
-    //    ].join('&&')
-    //  },
-    //  devRelease: {
-    //    options: {
-    //      stdout: true
-    //    },
-    //    command: ['cp -r ./public-dev ./releases/dev-<%= pkg.version %>',
-    //      'rm -rf ./releases/dev-<%= pkg.version %>/templates/*/'
-    //    ].join('&&')
-    //
-    //  }
-    //}
+    }
+
   });
 
   // Load tasks
@@ -569,26 +379,7 @@ module.exports = function (grunt) {
   // Register tasks
   grunt.registerTask('default', [
       'setup:dev'
-    //  //'startSetup:dev',
-    //  'clean:setup',
-    //  'copy:hgApps',
-    //  // css
-    //'less:developmentCss',
-    //// HTML Templates to JS
-    // 'html2js:scribe',
-    // 'html2js:admin',
-    //  // JS build
-    //'ngAnnotate:debug',
-    //'uglify:debug',
-    //// Compile HTML index files
-    //'replace:indexFormat',
-    //'tags:devAdminJS',
-    //'tags:devAdminCSS',
-    //'tags:devScribeJS',
-    //'tags:devScribeCSS',
-    ////'tags:releaseAdminIndexRedirectScript',       ////////////TODO: remove
-    //  // Pack dist file.
-    //  'copy:package'
+
   ]);
   ////////////////////////////////
   /// Private Tasks
@@ -612,8 +403,7 @@ module.exports = function (grunt) {
     if (env === 'dev' || env === 'devInit') {
       grunt.task.run([
       // HTML Templates to JS
-        'html2js:scribe',
-        'html2js:admin',
+        'html2js:jobmapping',
         // JS build
         //'jshint',
         'ngAnnotate:debug',
@@ -622,8 +412,7 @@ module.exports = function (grunt) {
     else if(env === 'test' || env === 'prod'){
       grunt.task.run([
         // HTML Templates to JS
-        'html2js:scribe',
-        'html2js:admin',
+        'html2js:jobmapping',
         // JS build
         //'jshint',
         'ngAnnotate:release',
@@ -648,10 +437,8 @@ module.exports = function (grunt) {
         'less:developmentCss',
         // Compile HTML index files
         'replace:indexFormat',
-        'tags:devAdminJS',
-        'tags:devAdminCSS',
-        'tags:devScribeJS',
-        'tags:devScribeCSS']);
+        'tags:devJobmappingJS',
+        'tags:devJobmappingCSS']);
     }
     else if( env === 'prod'){
 
@@ -662,13 +449,10 @@ module.exports = function (grunt) {
           'less:productionCss',
         // Compile HTML index files
         'replace:indexFormat',
-        'tags:releaseAdminJS',
-        'tags:releaseAdminCSS',
-        'tags:releaseScribeJS',
-        'tags:releaseScribeCSS',
-          'tags:releaseAdminIndexRedirectScript',
-          'tags:releaseScribeIndexRedirectScript',
-          'tags:releaseAdminIndexCDNScript'
+        'tags:releaseJobmappingJS',
+        'tags:releaseJobmappingCSS',
+          'tags:releaseJobmappingIndexRedirectScript',
+          'tags:releaseJobmappingIndexCDNScript'
         ]);
 
 
@@ -688,10 +472,8 @@ module.exports = function (grunt) {
         'less:productionCss',
         // Compile HTML index files
         'replace:indexFormat',
-        'tags:releaseAdminJS',
-        'tags:releaseAdminCSS',
-        'tags:releaseScribeJS',
-        'tags:releaseScribeCSS'
+        'tags:releaseJobmappingJS',
+        'tags:releaseJobmappingCSS'
       ]);
       //temp.cdn = _pkgCDN;
       //grunt.config.set("pkg",temp);
@@ -728,13 +510,6 @@ module.exports = function (grunt) {
     _env_compile.configIndexReplace= _pkg.configIndexReplace[env];
     _env_compile.env = env;
   });
-  /**
-   * GRUNT PACKAGE
-   * This setup the different settinging for each environment so that the build is correct.
-   *
-   */
-
-
 
   grunt.registerTask('prod', [
 
@@ -744,12 +519,6 @@ module.exports = function (grunt) {
     'tags:specRunnerTests'
   ]);
 
-  /**
-   * GRUNT PACKAGE
-   * Used to create packaged dev, test, staging & prod folders
-   * for deployment to dev, test and/or production.
-   *
-   */
   grunt.registerTask('setup', 'Setup App for Compile and Deployment', function (environment, releaseType) {
 
     if (!environment) {
@@ -769,29 +538,13 @@ module.exports = function (grunt) {
         'compileIndexAndLess:' + environment,
         'endBuild'
 
-      ])
+      ]);
     }
     else{
       grunt.log.error('This environment is not defined yet: ' + environment);
     }
 
 
-
-
-    //else if (environment === 'test') {
-    //  grunt.task.run(['startSetup:test', 'default']);
-    //} else if (environment === 'proxy') {
-    //  grunt.task.run(['startSetup:proxy','default']);
-    //}
-    //
-    //// TODO: Do these yet.
-    //else if (environment === 'staging') {
-    //  grunt.task.run(['default', 'shell:stagingRelease']);
-    //} else if (environment === 'prod') {
-    //  grunt.task.run(['prod', 'shell:prodRelease']);
-    //} else {
-    //  grunt.log.error('Unknown environment specified.');
-    //}
   });
 
 };

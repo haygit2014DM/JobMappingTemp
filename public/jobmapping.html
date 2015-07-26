@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="hg" id="ng-app">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Hay Group</title>
+    <link rel="icon" type="image/png" href="https://d31zyjoc8y26wk.cloudfront.net/hgApps/img/favicon.ico">
+    <!--- Add Css Libs Start -->
+    <!--- Add Css Libs End -->
+
+    <script type="text/javascript">
+      var queryStrings = window.location.search.substr(1).split('&');
+      if(queryStrings){
+        for(var i = 0; i < queryStrings.length; i++){
+          if(queryStrings[i].indexOf('e=') === 0){
+            window.deployEnvironment = queryStrings[i].substring(queryStrings[i].indexOf('=') + 1);
+          }
+        }
+      }
+
+      window.userApplication = 'jobmapping';
+      window.BASE_API_URL = '{{{BASE_URL}}}';
+      window.BASE_API_ENV = '{{{BASE_ENV}}}';
+      window.BASE_TOOGLE_DEPLOY = {{{TOOGLE_DEPLOY}}}
+      window.TEMPLATES_MODULE_NAME = 'templates-jobmapping';
+    </script>
+  </head>
+  <body ng-controller="JobMappingCtrl">
+    <div class="container containment">
+      <ng-include src="'jobmapping/pages/shared/header.html'"></ng-include>
+      <header class="header-bar">
+      </header>
+      <div ng-view></div>
+    </div>
+    <ng-include src="'jobmapping/pages/shared/footer.html'" class="footer-outer"></ng-include>
+  </body>
+  <!--- Add JS Libs Start -->
+  <!--- Add JS Libs End -->
+</html>
